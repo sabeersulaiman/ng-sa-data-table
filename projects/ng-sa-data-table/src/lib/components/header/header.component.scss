@@ -1,0 +1,39 @@
+@import '../../styles/defs';
+
+.sa-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: pxrem(22) pxrem(25);
+    border-bottom: 1px solid #cbd2d9;
+}
+
+.sa-table-title {
+    h1 {
+        font-size: pxrem(20);
+        font-weight: 600;
+        margin: 0;
+    }
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .sa-table-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: pxrem(10);
+        .action {
+            padding: pxrem(5);
+            border: 1px solid $cmain;
+            color: $cmain;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
+}

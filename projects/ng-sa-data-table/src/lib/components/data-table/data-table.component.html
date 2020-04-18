@@ -1,0 +1,46 @@
+<div class="sa-data-table-container">
+    <!-- Header -->
+    <sa-table-header
+        [title]="title"
+        [headerExtra]="headerExtra"
+        (action)="handleAction($event)"
+    ></sa-table-header>
+
+    <!-- Table Heading row -->
+    <div class="sa-data-table" [ngClass]="{ 'no-scroll': !scrollbarVisible }">
+        <table
+            [ngStyle]="tableStyles"
+            *ngIf="data && data.length > 0; else noData"
+        >
+            <thead>
+                <tr>
+                    <ng-container *ngFor="let c of columns"
+                        ><th
+                            *ngIf="c.visible"
+                            [ngStyle]="c.headerPaddings"
+                            [style.text-align]="c.textAlign"
+                        >
+                            {{ c.header }}
+                        </th></ng-container
+                    >
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    saTableRow
+                    *ngFor="let d of data; let i = index"
+                    [rowData]="d"
+                    [rowNumber]="i"
+                ></tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- pagination / Footer -->
+</div>
+
+<ng-template #noData>
+    <div class="no-data">
+        <i class="material-icons">error_outline</i>
+        <p>No data provided</p>
+    </div>
+</ng-template>

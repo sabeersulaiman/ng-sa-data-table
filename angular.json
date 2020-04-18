@@ -1,0 +1,171 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ng-sa-data-table": {
+      "projectType": "library",
+      "root": "projects/ng-sa-data-table",
+      "sourceRoot": "projects/ng-sa-data-table/src",
+      "prefix": "sa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-sa-data-table/tsconfig.lib.json",
+            "project": "projects/ng-sa-data-table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-sa-data-table/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-sa-data-table/src/test.ts",
+            "tsConfig": "projects/ng-sa-data-table/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-sa-data-table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-sa-data-table/tsconfig.lib.json",
+              "projects/ng-sa-data-table/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sa-data-table-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/sa-data-table-demo",
+      "sourceRoot": "projects/sa-data-table-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/sa-data-table-demo",
+            "index": "projects/sa-data-table-demo/src/index.html",
+            "main": "projects/sa-data-table-demo/src/main.ts",
+            "polyfills": "projects/sa-data-table-demo/src/polyfills.ts",
+            "tsConfig": "projects/sa-data-table-demo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/sa-data-table-demo/src/favicon.ico",
+              "projects/sa-data-table-demo/src/assets"
+            ],
+            "styles": [
+              "projects/sa-data-table-demo/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/sa-data-table-demo/src/environments/environment.ts",
+                  "with": "projects/sa-data-table-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "sa-data-table-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sa-data-table-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sa-data-table-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sa-data-table-demo/src/test.ts",
+            "polyfills": "projects/sa-data-table-demo/src/polyfills.ts",
+            "tsConfig": "projects/sa-data-table-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/sa-data-table-demo/karma.conf.js",
+            "assets": [
+              "projects/sa-data-table-demo/src/favicon.ico",
+              "projects/sa-data-table-demo/src/assets"
+            ],
+            "styles": [
+              "projects/sa-data-table-demo/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sa-data-table-demo/tsconfig.app.json",
+              "projects/sa-data-table-demo/tsconfig.spec.json",
+              "projects/sa-data-table-demo/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/sa-data-table-demo/e2e/protractor.conf.js",
+            "devServerTarget": "sa-data-table-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sa-data-table-demo:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "cli": {
+    "analytics": "cf00843c-57b4-4233-bf78-ecbdb352c61a"
+  },
+  "defaultProject": "ng-sa-data-table"
+}

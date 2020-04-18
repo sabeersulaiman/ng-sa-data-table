@@ -1,0 +1,10 @@
+// colors
+$cmain: #05386c;
+$cblack: #232323;
+
+// methods
+$pixelVal: 16;
+
+@function pxrem($val) {
+    @return $val/$pixelVal * 1rem;
+}

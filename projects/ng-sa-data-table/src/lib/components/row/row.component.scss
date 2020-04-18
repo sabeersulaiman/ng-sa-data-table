@@ -1,0 +1,14 @@
+td {
+    box-sizing: border-box;
+    &.hidden {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    &.visible {
+        word-wrap: break-word;
+    }
+    &.even {
+        background: rgba(242, 245, 248, 0.6);
+    }
+}

@@ -1,0 +1,17 @@
+<div class="sa-table-header">
+    <div class="sa-table-title">
+        <h1>{{ title || '' }}</h1>
+    </div>
+    <div class="settings">
+        <div
+            *ngIf="headerExtra"
+            class="extra"
+            [ngTemplateOutlet]="headerExtra"
+        ></div>
+        <div class="sa-table-actions">
+            <div (click)="handleAction('refresh')" title="Refresh Table" class="action">
+                <i class="material-icons">refresh</i>
+            </div>
+        </div>
+    </div>
+</div>

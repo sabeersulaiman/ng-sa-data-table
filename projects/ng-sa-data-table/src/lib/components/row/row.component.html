@@ -1,0 +1,11 @@
+<ng-container *ngFor="let c of table.columns">
+    <td
+        *ngIf="c.visible"
+        [ngStyle]="c.colPaddings"
+        [style.text-align]="c.textAlign"
+        [class]="c.overflow"
+        [ngClass]="{ even: rowNumber % 2 === 0, odd: rowNumber % 2 !== 0 }"
+    >
+        {{ rowData[c.property] }}
+    </td>
+</ng-container>

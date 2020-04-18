@@ -1,0 +1,40 @@
+<div class="centered">
+    <div class="table-center">
+        <sa-data-table
+            [scrollbarVisible]="false"
+            [data]="data"
+            [title]="'Company Users'"
+        >
+            <sa-column
+                [header]="'ID'"
+                [property]="'id'"
+                [visible]="false"
+            ></sa-column>
+            <sa-column
+                [header]="'First Name'"
+                [property]="'firstName'"
+            ></sa-column>
+            <sa-column
+                [header]="'Last Name'"
+                [property]="'lastName'"
+            ></sa-column>
+            <sa-column [header]="'Company'" [property]="'company'"></sa-column>
+            <sa-column [header]="'Phone'" [property]="'phone'"></sa-column>
+            <sa-column
+                [header]="'Email'"
+                [property]="'email'"
+                [overflow]="'visible'"
+                [width]="400"
+            ></sa-column>
+            <sa-column [header]="'DOB'" [property]="'dob'"></sa-column>
+            <sa-column [header]="'Address'" [property]="'address'"></sa-column>
+            <sa-column
+                [header]="'Interests'"
+                [property]="'interests'"
+            ></sa-column>
+            <!-- <ng-template #headerExtra>
+                <button (click)="handleShonan()" class="umaga">Shonan Jump</button>
+            </ng-template> -->
+        </sa-data-table>
+    </div>
+</div>
