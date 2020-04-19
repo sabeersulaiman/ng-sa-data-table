@@ -1,15 +1,20 @@
 <div class="sa-table-header">
     <div class="sa-table-title">
         <h1>{{ title || '' }}</h1>
+        <div *ngIf="headerExtraLeft" class="extra">
+            <ng-container [ngTemplateOutlet]="headerExtraLeft"></ng-container>
+        </div>
     </div>
     <div class="settings">
-        <div
-            *ngIf="headerExtra"
-            class="extra"
-            [ngTemplateOutlet]="headerExtra"
-        ></div>
+        <div *ngIf="headerExtraRight" class="extra">
+            <ng-container [ngTemplateOutlet]="headerExtraRight"></ng-container>
+        </div>
         <div class="sa-table-actions">
-            <div (click)="handleAction('refresh')" title="Refresh Table" class="action">
+            <div
+                (click)="handleAction('refresh')"
+                title="Refresh Table"
+                class="action"
+            >
                 <i class="material-icons">refresh</i>
             </div>
         </div>

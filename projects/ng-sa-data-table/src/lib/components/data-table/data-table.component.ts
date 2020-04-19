@@ -57,10 +57,16 @@ export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
     public columns: SaColumnDirective[];
 
     /**
-     * extra content to be shown in header
+     * extra content to be shown in header right
      */
-    @ContentChild('headerExtra')
-    public headerExtra: TemplateRef<any>;
+    @ContentChild('headerExtraRight')
+    public headerExtraRight: TemplateRef<any>;
+
+    /**
+     * extra content to be shown in header left
+     */
+    @ContentChild('headerExtraLeft')
+    public headerExtraLeft: TemplateRef<any>;
 
     /**
      * rows currently avaialble in the data table

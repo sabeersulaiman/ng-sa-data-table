@@ -9,10 +9,16 @@
 }
 
 .sa-table-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     h1 {
         font-size: pxrem(20);
         font-weight: 600;
         margin: 0;
+    }
+    .extra {
+        margin-left: pxrem(10);
     }
 }
 
