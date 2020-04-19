@@ -1,14 +1,29 @@
+@import '../../styles/defs';
+
 td {
     box-sizing: border-box;
+    color: #4d4f5c;
+    font-size: pxrem(16);
+    font-weight: 600;
     &.hidden {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    &.visible {
+    &.break-visible {
         word-wrap: break-word;
     }
-    &.even {
+    &.normal {
+        overflow: auto;
+    }
+    &.odd {
         background: rgba(242, 245, 248, 0.6);
+    }
+    &.select-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        overflow: hidden;
     }
 }

@@ -4,6 +4,8 @@
             [scrollbarVisible]="false"
             [data]="data"
             [title]="'Company Users'"
+            [selectable]="true"
+            (selection)="onSelectionChange($event)"
         >
             <sa-column
                 [header]="'ID'"
@@ -23,14 +25,25 @@
             <sa-column
                 [header]="'Email'"
                 [property]="'email'"
-                [overflow]="'visible'"
+                [overflow]="tableOverflowModes.breakVisible"
                 [width]="400"
             ></sa-column>
-            <sa-column [header]="'DOB'" [property]="'dob'"></sa-column>
-            <sa-column [header]="'Address'" [property]="'address'"></sa-column>
+            <sa-column
+                [header]="'DOB'"
+                [property]="'dob'"
+                [width]="300"
+            ></sa-column>
+            <sa-column
+                [header]="'Address'"
+                [property]="'address'"
+                [width]="200"
+                [overflow]="tableOverflowModes.visible"
+            ></sa-column>
             <sa-column
                 [header]="'Interests'"
                 [property]="'interests'"
+                [overflow]="tableOverflowModes.visible"
+                [width]="300"
             ></sa-column>
             <!-- <ng-template #headerExtra>
                 <button (click)="handleShonan()" class="umaga">Shonan Jump</button>

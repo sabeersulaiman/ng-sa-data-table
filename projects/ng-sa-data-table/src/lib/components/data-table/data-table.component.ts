@@ -6,15 +6,21 @@ import {
     AfterContentInit,
     ContentChild,
     TemplateRef,
+    ViewChildren,
+    ChangeDetectorRef,
+    AfterViewInit,
+    Output,
+    EventEmitter,
 } from '@angular/core';
 import { SaColumnDirective } from '../../directives/column/column.directive';
+import { SaTableRowComponent } from '../row/row.component';
 
 @Component({
     selector: 'sa-data-table',
     templateUrl: './data-table.component.html',
     styleUrls: ['./data-table.component.scss'],
 })
-export class SaDataTableComponent implements AfterContentInit {
+export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
     /**
      * data for the table
      */
@@ -34,6 +40,12 @@ export class SaDataTableComponent implements AfterContentInit {
     public scrollbarVisible = true;
 
     /**
+     * whether selections are enabled or not
+     */
+    @Input()
+    public selectable = true;
+
+    /**
      * columns query list
      */
     @ContentChildren(SaColumnDirective)
@@ -51,6 +63,23 @@ export class SaDataTableComponent implements AfterContentInit {
     public headerExtra: TemplateRef<any>;
 
     /**
+     * rows currently avaialble in the data table
+     */
+    @ViewChildren(SaTableRowComponent)
+    public rows: QueryList<SaTableRowComponent>;
+
+    /**
+     * selection changed event
+     */
+    @Output()
+    public selection = new EventEmitter<any[]>();
+
+    /**
+     * selected rows
+     */
+    public selectedRows: SaTableRowComponent[] = [];
+
+    /**
      * table styles
      */
     public tableStyles = {
@@ -58,9 +87,16 @@ export class SaDataTableComponent implements AfterContentInit {
     };
 
     /**
+     * get the selected row data
+     */
+    public get selectionData(): any[] {
+        return this.selectedRows.map((x) => x.rowData);
+    }
+
+    /**
      * main DI constructor
      */
-    constructor() {}
+    constructor(private _cdr: ChangeDetectorRef) {}
 
     public ngAfterContentInit() {
         // create the required styles and data for the table
@@ -68,6 +104,10 @@ export class SaDataTableComponent implements AfterContentInit {
         this.columnQueryList.changes.subscribe(
             this._handleColumnChanges.bind(this)
         );
+    }
+
+    public ngAfterViewInit() {
+        this._cdr.detectChanges();
     }
 
     private _handleColumnChanges() {
@@ -87,6 +127,12 @@ export class SaDataTableComponent implements AfterContentInit {
         }
 
         const colSizes: string[] = [];
+
+        // if column selection is enabled, there is an extra column for selector
+        if (this.selectable) {
+            colSizes.push('70px');
+        }
+
         for (const col of this.columns) {
             if (!col.visible) {
                 continue;
@@ -105,5 +151,28 @@ export class SaDataTableComponent implements AfterContentInit {
         }
 
         this.tableStyles.gridTemplateColumns = colSizes.join(' ');
+    }
+
+    public onSelectionChange() {
+        this.selectedRows = this.rows.filter((r) => r.selected);
+        this.selection.emit(this.selectionData);
+    }
+
+    public selectAllRows() {
+        this.rows.forEach((r) => r.select());
+        this.onSelectionChange();
+    }
+
+    public deSelectAllRows() {
+        this.rows.forEach((r) => r.deSelect());
+        this.onSelectionChange();
+    }
+
+    public onToggleFullSelection() {
+        if (this.rows.length === this.selectedRows.length) {
+            this.deSelectAllRows();
+        } else {
+            this.selectAllRows();
+        }
     }
 }
