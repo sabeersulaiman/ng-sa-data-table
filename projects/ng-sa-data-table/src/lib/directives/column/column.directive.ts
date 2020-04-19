@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, ContentChild, TemplateRef } from '@angular/core';
 import { overflowModes } from '../../data/overflow.data';
 
 @Directive({
@@ -41,6 +41,9 @@ export class SaColumnDirective {
 
     @Input()
     public overflow = overflowModes.hidden;
+
+    @ContentChild('colTemplate')
+    public columnTemplate: TemplateRef<any>;
 
     constructor() {}
 }
