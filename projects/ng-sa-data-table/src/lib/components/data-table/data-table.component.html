@@ -14,6 +14,25 @@
         >
             <thead>
                 <tr>
+                    <th
+                        *ngIf="selectable"
+                        class="select-head"
+                        (click)="onToggleFullSelection()"
+                    >
+                        <i
+                            class="material-icons"
+                            *ngIf="
+                                rows && selectedRows.length === rows.length;
+                                else noSelection
+                            "
+                            >check_box</i
+                        >
+                        <ng-template #noSelection>
+                            <i class="material-icons"
+                                >check_box_outline_blank</i
+                            >
+                        </ng-template>
+                    </th>
                     <ng-container *ngFor="let c of columns"
                         ><th
                             *ngIf="c.visible"
@@ -31,6 +50,8 @@
                     *ngFor="let d of data; let i = index"
                     [rowData]="d"
                     [rowNumber]="i"
+                    (selection)="onSelectionChange()"
+                    (deSelection)="onSelectionChange()"
                 ></tr>
             </tbody>
         </table>

@@ -1,4 +1,5 @@
 export const overflowModes = {
     hidden: 'hidden',
-    visible: 'visible',
+    visible: 'normal',
+    breakVisible: 'break-visible',
 };

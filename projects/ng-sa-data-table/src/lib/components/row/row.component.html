@@ -1,3 +1,17 @@
+<td
+    class="select-box"
+    *ngIf="table.selectable"
+    [ngClass]="{ even: rowNumber % 2 === 0, odd: rowNumber % 2 !== 0 }"
+    (click)="onSelectionToggle()"
+>
+    <i class="material-icons" *ngIf="!selected; else selectionIcon"
+        >check_box_outline_blank</i
+    >
+    <ng-template #selectionIcon>
+        <i class="material-icons">check_box</i>
+    </ng-template>
+</td>
+
 <ng-container *ngFor="let c of table.columns">
     <td
         *ngIf="c.visible"
