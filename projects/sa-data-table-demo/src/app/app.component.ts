@@ -12,11 +12,17 @@ export class AppComponent {
 
     tableOverflowModes = overflowModes;
 
+    weData = 'DOB Placeholder.';
+
     public handleShonan() {
         alert('Shonan Jump');
     }
 
     public onSelectionChange(d) {
+        console.log(d);
+    }
+
+    public deleteUser(d) {
         console.log(d);
     }
 }

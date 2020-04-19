@@ -12,6 +12,11 @@
                 [property]="'id'"
                 [visible]="false"
             ></sa-column>
+            <sa-column [header]="'Full Name'" [width]="200">
+                <ng-template #colTemplate let-data>
+                    {{ data.firstName }} {{ data.lastName }}
+                </ng-template>
+            </sa-column>
             <sa-column
                 [header]="'First Name'"
                 [property]="'firstName'"
@@ -28,11 +33,13 @@
                 [overflow]="tableOverflowModes.breakVisible"
                 [width]="400"
             ></sa-column>
-            <sa-column
-                [header]="'DOB'"
-                [property]="'dob'"
-                [width]="300"
-            ></sa-column>
+            <sa-column [header]="'DOB'" [property]="'dob'" [width]="300">
+                <ng-template #colTemplate let-user>
+                    <div class="col">
+                        {{ user.dob | date: 'short' }}
+                    </div>
+                </ng-template>
+            </sa-column>
             <sa-column
                 [header]="'Address'"
                 [property]="'address'"
@@ -45,9 +52,23 @@
                 [overflow]="tableOverflowModes.visible"
                 [width]="300"
             ></sa-column>
-            <!-- <ng-template #headerExtra>
+            <sa-column
+                [header]="'Delete User'"
+                [overflow]="tableOverflowModes.visible"
+                [width]="300"
+            >
+                <ng-template #colTemplate let-data>
+                    <button (click)="deleteUser(data)">
+                        Delete {{ data.firstName }}
+                    </button>
+                </ng-template>
+            </sa-column>
+            <ng-template #headerExtraRight>
+                <button (click)="handleShonan()" class="umaga">Adult Jump</button>
+            </ng-template>
+            <ng-template #headerExtraLeft>
                 <button (click)="handleShonan()" class="umaga">Shonan Jump</button>
-            </ng-template> -->
+            </ng-template>
         </sa-data-table>
     </div>
 </div>

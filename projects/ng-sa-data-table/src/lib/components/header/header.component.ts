@@ -16,7 +16,10 @@ export class SaTableHeaderComponent {
     public title: string;
 
     @Input()
-    public headerExtra: ElementRef;
+    public headerExtraRight: ElementRef;
+
+    @Input()
+    public headerExtraLeft: ElementRef;
 
     @Output()
     public action = new EventEmitter<string>();

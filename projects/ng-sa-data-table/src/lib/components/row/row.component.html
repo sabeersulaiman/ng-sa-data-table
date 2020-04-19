@@ -20,6 +20,12 @@
         [class]="c.overflow"
         [ngClass]="{ even: rowNumber % 2 === 0, odd: rowNumber % 2 !== 0 }"
     >
-        {{ rowData[c.property] }}
+        <ng-container
+            *ngIf="c.columnTemplate; else simpleCol"
+            [ngTemplateOutlet]="c.columnTemplate"
+            [ngTemplateOutletContext]="{ $implicit: rowData }"
+        >
+        </ng-container>
+        <ng-template #simpleCol> {{ rowData[c.property] }}</ng-template>
     </td>
 </ng-container>
