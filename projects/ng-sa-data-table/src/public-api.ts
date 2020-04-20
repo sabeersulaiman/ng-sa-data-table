@@ -7,3 +7,6 @@ export * from './lib/directives/column/column.directive';
 
 // consts
 export * from './lib/data/overflow.data';
+
+// models
+export * from './lib/models/public.models';

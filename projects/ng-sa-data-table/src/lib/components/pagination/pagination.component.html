@@ -1,0 +1,56 @@
+<div class="pagination">
+    <div
+        (click)="switchPage(1)"
+        class="page"
+        [ngClass]="{ na: this.page === 1 }"
+        title="First Page"
+    >
+        <i class="material-icons">first_page</i>
+    </div>
+    <div
+        (click)="switchPage(this.page - 1)"
+        class="page"
+        [ngClass]="{ na: this.page === 1 }"
+        title="Previous Page"
+    >
+        <i class="material-icons">chevron_left</i>
+    </div>
+
+    <div
+        *ngFor="let p of pages"
+        (click)="switchPage(p.page)"
+        class="page"
+        [ngClass]="{
+            selected: this.page === p.page,
+            na: this.page === p.page,
+            nonpage: p.nonPage
+        }"
+    >
+        <p>{{ p.name }}</p>
+    </div>
+
+    <div
+        (click)="switchPage(this.page + 1)"
+        class="page"
+        [ngClass]="{ na: this.page === this.lastPage }"
+        title="Next page"
+    >
+        <i class="material-icons">chevron_right</i>
+    </div>
+    <div
+        (click)="switchPage(this.lastPage)"
+        class="page"
+        [ngClass]="{ na: this.page === this.lastPage }"
+        title="Last page"
+    >
+        <i class="material-icons">last_page</i>
+    </div>
+
+    <div class="page-picker">
+        <select #perPage (change)="onPerPageChanged()">
+            <option *ngFor="let op of perPageOptions" [value]="op"
+                >{{ op }} / page</option
+            >
+        </select>
+    </div>
+</div>

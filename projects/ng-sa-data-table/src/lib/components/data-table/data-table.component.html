@@ -1,63 +1,75 @@
 <div class="sa-data-table-container">
-    <!-- Header -->
-    <sa-table-header
-        [title]="title"
-        [headerExtraLeft]="headerExtraLeft"
-        [headerExtraRight]="headerExtraRight"
-        (action)="handleAction($event)"
-    ></sa-table-header>
+    <div class="sa-data-table-content">
+        <!-- Header -->
+        <sa-table-header
+            [title]="title"
+            [headerExtraLeft]="headerExtraLeft"
+            [headerExtraRight]="headerExtraRight"
+            (action)="handleAction($event)"
+        ></sa-table-header>
 
-    <!-- Table Heading row -->
-    <div class="sa-data-table" [ngClass]="{ 'no-scroll': !scrollbarVisible }">
-        <table
-            [ngStyle]="tableStyles"
-            *ngIf="data && data.length > 0; else noData"
+        <div
+            class="sa-data-table"
+            [ngClass]="{ 'no-scroll': !scrollbarVisible }"
         >
-            <thead>
-                <tr>
-                    <th
-                        *ngIf="selectable"
-                        class="select-head"
-                        (click)="onToggleFullSelection()"
-                    >
-                        <i
-                            class="material-icons"
-                            *ngIf="
-                                rows && selectedRows.length === rows.length;
-                                else noSelection
-                            "
-                            >check_box</i
+            <table
+                [ngStyle]="tableStyles"
+                *ngIf="data && data.length > 0; else noData"
+            >
+                <thead>
+                    <tr>
+                        <th
+                            *ngIf="selectable"
+                            class="select-head"
+                            (click)="onToggleFullSelection()"
                         >
-                        <ng-template #noSelection>
-                            <i class="material-icons"
-                                >check_box_outline_blank</i
+                            <i
+                                class="material-icons"
+                                *ngIf="
+                                    rows && selectedRows.length === rows.length;
+                                    else noSelection
+                                "
+                                >check_box</i
                             >
-                        </ng-template>
-                    </th>
-                    <ng-container *ngFor="let c of columns"
-                        ><th
-                            *ngIf="c.visible"
-                            [ngStyle]="c.headerPaddings"
-                            [style.text-align]="c.textAlign"
+                            <ng-template #noSelection>
+                                <i class="material-icons"
+                                    >check_box_outline_blank</i
+                                >
+                            </ng-template>
+                        </th>
+                        <ng-container *ngFor="let c of columns"
+                            ><th
+                                *ngIf="c.visible"
+                                [ngStyle]="c.headerPaddings"
+                                [style.text-align]="c.textAlign"
+                            >
+                                {{ c.header }}
+                            </th></ng-container
                         >
-                            {{ c.header }}
-                        </th></ng-container
-                    >
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    saTableRow
-                    *ngFor="let d of data; let i = index"
-                    [rowData]="d"
-                    [rowNumber]="i"
-                    (selection)="onSelectionChange()"
-                    (deSelection)="onSelectionChange()"
-                ></tr>
-            </tbody>
-        </table>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        saTableRow
+                        *ngFor="let d of data; let i = index"
+                        [rowData]="d"
+                        [rowNumber]="i"
+                        (selection)="onSelectionChange()"
+                        (deSelection)="onSelectionChange()"
+                    ></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
     <!-- pagination / Footer -->
+    <sa-table-pagination
+        *ngIf="pagination && total"
+        [perPage]="perPage"
+        [total]="total"
+        [perPageOptions]="perPageOptions"
+        (pageChange)="onPaginationFilterChange($event)"
+    ></sa-table-pagination>
 </div>
 
 <ng-template #noData>

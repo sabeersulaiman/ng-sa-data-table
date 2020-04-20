@@ -4,6 +4,7 @@ import { SaColumnDirective } from './directives/column/column.directive';
 import { SaTableHeaderComponent } from './components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { SaTableRowComponent } from './components/row/row.component';
+import { SaTablePaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
     declarations: [
@@ -11,6 +12,7 @@ import { SaTableRowComponent } from './components/row/row.component';
         SaColumnDirective,
         SaTableHeaderComponent,
         SaTableRowComponent,
+        SaTablePaginationComponent,
     ],
     imports: [CommonModule],
     exports: [SaDataTableComponent, SaColumnDirective],

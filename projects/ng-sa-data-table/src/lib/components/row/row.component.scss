@@ -21,9 +21,10 @@ td {
     }
     &.select-box {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         cursor: pointer;
         overflow: hidden;
+        padding-top: pxrem(22);
     }
 }

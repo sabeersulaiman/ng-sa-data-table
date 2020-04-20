@@ -1,0 +1,53 @@
+@import '../../styles/defs';
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: pxrem(35);
+    .page {
+        width: pxrem(35);
+        height: pxrem(35);
+        background-color: #fff;
+        border: 1px solid #e8e9ec;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #4d4f5c;
+        margin-right: pxrem(8);
+        font-size: pxrem(13);
+        font-weight: 600;
+        cursor: pointer;
+        p {
+            margin: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        &.selected {
+            background-color: #ddecfc;
+            border: 1px solid #05386c;
+        }
+        &.na {
+            cursor: not-allowed;
+        }
+        &.nonpage {
+            background: none;
+            border: none;
+        }
+    }
+    .page-picker {
+        select {
+            height: pxrem(35);
+            background: #fff;
+            border: 1px solid #E9E9F0;
+            border-radius: 4px;
+            color: #4D4F5C;
+            font-size: pxrem(13);
+            font-weight: 600;
+            font-family: inherit;
+            padding: pxrem(6) pxrem(10);
+        }
+    }
+}
