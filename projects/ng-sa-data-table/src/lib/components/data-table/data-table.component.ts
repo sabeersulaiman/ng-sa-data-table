@@ -11,21 +11,34 @@ import {
     AfterViewInit,
     Output,
     EventEmitter,
+    OnInit,
+    ChangeDetectionStrategy,
 } from '@angular/core';
 import { SaColumnDirective } from '../../directives/column/column.directive';
 import { SaTableRowComponent } from '../row/row.component';
+import { SaTableFilters } from '../../models/public.models';
+import { actionNames } from '../../data/internal.data';
 
 @Component({
     selector: 'sa-data-table',
     templateUrl: './data-table.component.html',
     styleUrls: ['./data-table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
+export class SaDataTableComponent
+    implements AfterContentInit, AfterViewInit, OnInit {
     /**
      * data for the table
      */
+    private _data: any[];
     @Input()
-    public data: any[];
+    public get data() {
+        return this._data;
+    }
+    public set data(v: any[]) {
+        this._data = v;
+        this._onDataChange();
+    }
 
     /**
      * title of the table
@@ -44,6 +57,41 @@ export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
      */
     @Input()
     public selectable = true;
+
+    /**
+     * whether pagination is enabled or not
+     */
+    @Input()
+    public pagination = true;
+
+    /**
+     * number of items to be shown in one page
+     */
+    @Input()
+    public perPage = 20;
+
+    /**
+     * total number of items available for this table to be shown
+     */
+    @Input()
+    public total: number;
+
+    /**
+     * per page item options
+     */
+    @Input()
+    public perPageOptions = [20, 50, 100];
+
+    /**
+     * whether there should be an event for the initial load
+     */
+    @Input()
+    public initialLoad = false;
+
+    /**
+     * last activated filters on table
+     */
+    public currentFilterData: SaTableFilters;
 
     /**
      * columns query list
@@ -81,6 +129,12 @@ export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
     public selection = new EventEmitter<any[]>();
 
     /**
+     * filter change event
+     */
+    @Output()
+    public filter = new EventEmitter<SaTableFilters>();
+
+    /**
      * selected rows
      */
     public selectedRows: SaTableRowComponent[] = [];
@@ -104,6 +158,19 @@ export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
      */
     constructor(private _cdr: ChangeDetectorRef) {}
 
+    /**
+     * init component
+     */
+    public ngOnInit() {
+        this.currentFilterData = {
+            page: 1,
+            perPage: this.perPage,
+        };
+        if (this.initialLoad) {
+            this.filter.emit(this.currentFilterData);
+        }
+    }
+
     public ngAfterContentInit() {
         // create the required styles and data for the table
         this._handleColumnChanges();
@@ -125,7 +192,13 @@ export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
         this._constructTableConstraints();
     }
 
-    public handleAction(action: string) {}
+    public handleAction(action: string) {
+        if (action === actionNames.reload) {
+            this.reload();
+        } else {
+            // other actions
+        }
+    }
 
     private _constructTableConstraints() {
         if (!this.columns) {
@@ -148,8 +221,12 @@ export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
             const maxColSize = 1.66; // in frs
 
             if (col.width) {
-                // fixed width provided
-                colSizes.push(`${col.width}px`);
+                if (typeof col.width === 'number') {
+                    // fixed width provided
+                    colSizes.push(`${col.width}px`);
+                } else {
+                    colSizes.push(col.width);
+                }
             } else {
                 // use minmax col width
                 colSizes.push(`minmax(${minColSize}px, ${maxColSize}fr)`);
@@ -180,5 +257,22 @@ export class SaDataTableComponent implements AfterContentInit, AfterViewInit {
         } else {
             this.selectAllRows();
         }
+    }
+
+    public onPaginationFilterChange(f: SaTableFilters) {
+        this.currentFilterData = f;
+        this.filter.emit(this.currentFilterData);
+    }
+
+    private _onDataChange() {
+        this._cdr.detectChanges();
+    }
+
+    public onColumnSelectionChange() {
+        this._constructTableConstraints();
+    }
+
+    public reload() {
+        this.filter.emit(this.currentFilterData);
     }
 }

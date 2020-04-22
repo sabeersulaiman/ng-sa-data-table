@@ -16,6 +16,7 @@
         font-size: pxrem(20);
         font-weight: 600;
         margin: 0;
+        color: #232323;
     }
     .extra {
         margin-left: pxrem(10);
@@ -40,6 +41,90 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            margin-right: pxrem(12);
+            &:last-child {
+                margin-right: 0;
+            }
+            &.danger {
+                border-radius: 50%;
+                color: red;
+                border-color: red;
+            }
+        }
+    }
+}
+
+.column-selection-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.column-selector {
+    background: #fff;
+    border-radius: 30px;
+    width: 90%;
+    max-width: pxrem(400);
+    box-shadow: 0 0 30px rgba(#000, 0.17);
+    height: 90%;
+    max-height: pxrem(600);
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.column-selector-head {
+    flex: 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: pxrem(20) pxrem(35);
+    border-bottom: 1px solid #cbd2d9;
+    .lefter {
+        h1 {
+            font-size: pxrem(20);
+            font-weight: 600;
+            color: #232323;
+            margin: 0;
+        }
+    }
+}
+
+ul.columns {
+    flex: 1 0 0;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    &.no-scroll {
+        scrollbar-width: none;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    .column {
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: pxrem(20) pxrem(35);
+        cursor: pointer;
+        &:nth-child(even) {
+            background: rgba(#cbd2d9, 0.17);
+        }
+        p {
+            margin: 0;
+            margin-left: pxrem(12);
+            font-size: pxrem(18);
+            font-weight: 200;
         }
     }
 }

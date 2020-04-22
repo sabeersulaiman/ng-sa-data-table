@@ -2,10 +2,14 @@
     <div class="table-center">
         <sa-data-table
             [scrollbarVisible]="false"
-            [data]="data"
+            [data]="tData"
             [title]="'Company Users'"
             [selectable]="true"
+            [total]="100"
+            [perPage]="30"
             (selection)="onSelectionChange($event)"
+            (filter)="onTableReload($event)"
+            [initialLoad]="true"
         >
             <sa-column
                 [header]="'ID'"
@@ -64,10 +68,10 @@
                 </ng-template>
             </sa-column>
             <ng-template #headerExtraRight>
-                <button (click)="handleShonan()" class="umaga">Adult Jump</button>
+                <button (click)="handleShonan()" class="umaga">Some Button</button>
             </ng-template>
             <ng-template #headerExtraLeft>
-                <button (click)="handleShonan()" class="umaga">Shonan Jump</button>
+                <button (click)="handleShonan()" class="umaga">Some Other Button</button>
             </ng-template>
         </sa-data-table>
     </div>

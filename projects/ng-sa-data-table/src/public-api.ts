@@ -6,4 +6,7 @@ export * from './lib/components/data-table/data-table.component';
 export * from './lib/directives/column/column.directive';
 
 // consts
-export * from './lib/data/overflow.data';
+export * from './lib/data/public.data';
+
+// models
+export * from './lib/models/public.models';
