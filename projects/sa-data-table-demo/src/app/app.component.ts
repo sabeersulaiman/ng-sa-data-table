@@ -33,6 +33,8 @@ export class AppComponent {
     public onTableReload(filter: SaTableFilters) {
         this.tData = this._loadPage(filter.page, filter.perPage);
         this._cdr.detectChanges();
+
+        console.log(filter, 'Filtering....');
     }
 
     private _loadPage(page: number, perPage: number): any[] {

@@ -4,8 +4,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: pxrem(35);
+    padding: pxrem(35);
+    flex-wrap: wrap;
+    padding-bottom: 0;
+    &.no-scroll {
+        scrollbar-width: none;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
     .page {
+        flex-shrink: 0;
         width: pxrem(35);
         height: pxrem(35);
         background-color: #fff;
@@ -19,6 +30,7 @@
         font-size: pxrem(13);
         font-weight: 600;
         cursor: pointer;
+        margin-bottom: 5px;
         p {
             margin: 0;
         }

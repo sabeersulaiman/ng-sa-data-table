@@ -11,12 +11,54 @@
         </div>
         <div class="sa-table-actions">
             <div
-                (click)="handleAction('refresh')"
+                *ngIf="columns"
+                class="action"
+                title="Manage Columns"
+                (click)="selectingColumn = true"
+            >
+                <i class="material-icons">view_column</i>
+            </div>
+            <div
+                (click)="handleAction(actions.reload)"
                 title="Refresh Table"
                 class="action"
             >
                 <i class="material-icons">refresh</i>
             </div>
         </div>
+    </div>
+</div>
+
+<div *ngIf="columns && selectingColumn" class="column-selection-wrapper">
+    <div class="column-selector">
+        <div class="column-selector-head settings">
+            <div class="lefter"><h1>Manage Columns</h1></div>
+            <div class="righter sa-table-actions">
+                <div class="actions">
+                    <div
+                        title="Close"
+                        (click)="selectingColumn = false"
+                        class="action danger"
+                    >
+                        <i class="material-icons">close</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="columns no-scroll">
+            <li
+                *ngFor="let c of columns"
+                class="column"
+                (click)="triggerVisibility(c)"
+            >
+                <i *ngIf="c.visible; else notVisible" class="material-icons"
+                    >check_box</i
+                >
+                <ng-template #notVisible>
+                    <i class="material-icons">check_box_outline_blank</i>
+                </ng-template>
+                <p>{{ c.header || 'Unknown Column Header' }}</p>
+            </li>
+        </ul>
     </div>
 </div>

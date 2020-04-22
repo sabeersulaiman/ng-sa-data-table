@@ -5,6 +5,8 @@
             [title]="title"
             [headerExtraLeft]="headerExtraLeft"
             [headerExtraRight]="headerExtraRight"
+            [columns]="columns"
+            (columnChanged)="onColumnSelectionChange()"
             (action)="handleAction($event)"
         ></sa-table-header>
 

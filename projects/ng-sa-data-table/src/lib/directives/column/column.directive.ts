@@ -1,5 +1,5 @@
 import { Directive, Input, ContentChild, TemplateRef } from '@angular/core';
-import { overflowModes } from '../../data/overflow.data';
+import { overflowModes } from '../../data/public.data';
 
 @Directive({
     selector: 'sa-column',
@@ -12,7 +12,7 @@ export class SaColumnDirective {
     public property: string;
 
     @Input()
-    public width: number;
+    public width: number | string;
 
     @Input()
     public visible = true;

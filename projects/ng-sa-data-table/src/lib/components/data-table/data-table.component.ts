@@ -17,12 +17,13 @@ import {
 import { SaColumnDirective } from '../../directives/column/column.directive';
 import { SaTableRowComponent } from '../row/row.component';
 import { SaTableFilters } from '../../models/public.models';
+import { actionNames } from '../../data/internal.data';
 
 @Component({
     selector: 'sa-data-table',
     templateUrl: './data-table.component.html',
     styleUrls: ['./data-table.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaDataTableComponent
     implements AfterContentInit, AfterViewInit, OnInit {
@@ -191,7 +192,13 @@ export class SaDataTableComponent
         this._constructTableConstraints();
     }
 
-    public handleAction(action: string) {}
+    public handleAction(action: string) {
+        if (action === actionNames.reload) {
+            this.reload();
+        } else {
+            // other actions
+        }
+    }
 
     private _constructTableConstraints() {
         if (!this.columns) {
@@ -214,8 +221,12 @@ export class SaDataTableComponent
             const maxColSize = 1.66; // in frs
 
             if (col.width) {
-                // fixed width provided
-                colSizes.push(`${col.width}px`);
+                if (typeof col.width === 'number') {
+                    // fixed width provided
+                    colSizes.push(`${col.width}px`);
+                } else {
+                    colSizes.push(col.width);
+                }
             } else {
                 // use minmax col width
                 colSizes.push(`minmax(${minColSize}px, ${maxColSize}fr)`);
@@ -255,5 +266,13 @@ export class SaDataTableComponent
 
     private _onDataChange() {
         this._cdr.detectChanges();
+    }
+
+    public onColumnSelectionChange() {
+        this._constructTableConstraints();
+    }
+
+    public reload() {
+        this.filter.emit(this.currentFilterData);
     }
 }
