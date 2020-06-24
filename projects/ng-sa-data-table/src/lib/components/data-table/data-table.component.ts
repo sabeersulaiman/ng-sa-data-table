@@ -13,11 +13,13 @@ import {
     EventEmitter,
     OnInit,
     ChangeDetectionStrategy,
+    ViewChild,
 } from '@angular/core';
 import { SaColumnDirective } from '../../directives/column/column.directive';
 import { SaTableRowComponent } from '../row/row.component';
 import { SaTableFilters } from '../../models/public.models';
 import { actionNames } from '../../data/internal.data';
+import { SaTablePaginationComponent } from '../pagination/pagination.component';
 
 @Component({
     selector: 'sa-data-table',
@@ -153,6 +155,12 @@ export class SaDataTableComponent
         return this.selectedRows.map((x) => x.rowData);
     }
 
+    @ViewChild(SaTablePaginationComponent)
+    public paginationInstance: SaTablePaginationComponent;
+
+    @Input()
+    public actionsEnabled = true;
+
     /**
      * main DI constructor
      */
@@ -168,6 +176,17 @@ export class SaDataTableComponent
         };
         if (this.initialLoad) {
             this.filter.emit(this.currentFilterData);
+        }
+    }
+
+    public reset() {
+        if (this.paginationInstance) {
+            this.paginationInstance.switchPage(1, true);
+        } else {
+            this.filter.emit({
+                page: 1,
+                perPage: this.perPage,
+            });
         }
     }
 

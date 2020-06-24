@@ -10,6 +10,7 @@
             (selection)="onSelectionChange($event)"
             (filter)="onTableReload($event)"
             [initialLoad]="true"
+            [actionsEnabled]="actionsEnabled"
         >
             <sa-column
                 [header]="'ID'"
@@ -68,11 +69,61 @@
                 </ng-template>
             </sa-column>
             <ng-template #headerExtraRight>
-                <button (click)="handleShonan()" class="umaga">Some Button</button>
+                <button (click)="table.reset()" class="umaga">
+                    Reset Table
+                </button>
             </ng-template>
             <ng-template #headerExtraLeft>
-                <button (click)="handleShonan()" class="umaga">Some Other Button</button>
+                <button
+                    (click)="actionsEnabled = !actionsEnabled"
+                    class="umaga"
+                >
+                    Toggle Actions
+                </button>
             </ng-template>
         </sa-data-table>
+        <!-- <sa-data-table
+            [scrollbarVisible]="false"
+            [data]="dashData"
+            [title]="'Recent Transactions'"
+            [selectable]="false"
+            [perPage]="15"
+            (filter)="loadDData()"
+            [initialLoad]="true"
+            [total]="data.length"
+        >
+            <sa-column header="Date" width="300px">
+                <ng-template #colTemplate let-tran>
+                    <div class="col">
+                        {{ tran.datetime | date: 'short' }}
+                    </div>
+                </ng-template>
+            </sa-column>
+            <sa-column
+                width="300px"
+                header="Transaction ID"
+                property="transaction_id"
+            ></sa-column>
+            <sa-column header="Amount" width="300px">
+                <ng-template #colTemplate let-tran>
+                    {{ tran.amount | number: '.2-2' }}
+                </ng-template>
+            </sa-column>
+            <sa-column
+                header="Acc Number"
+                property=""
+                width="300px"
+            ></sa-column>
+            <sa-column header="Status" width="300px">
+                <ng-template #colTemplate let-tran>
+                    <div
+                        class="tran-status"
+                        [ngClass]="getTransactionStatus(tran)"
+                    >
+                        {{ getTransactionStatus(tran) }}
+                    </div>
+                </ng-template>
+            </sa-column>
+        </sa-data-table> -->
     </div>
 </div>

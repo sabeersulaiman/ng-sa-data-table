@@ -10,21 +10,23 @@
             <ng-container [ngTemplateOutlet]="headerExtraRight"></ng-container>
         </div>
         <div class="sa-table-actions">
-            <div
-                *ngIf="columns"
-                class="action"
-                title="Manage Columns"
-                (click)="selectingColumn = true"
-            >
-                <i class="material-icons">view_column</i>
-            </div>
-            <div
-                (click)="handleAction(actions.reload)"
-                title="Refresh Table"
-                class="action"
-            >
-                <i class="material-icons">refresh</i>
-            </div>
+            <ng-container *ngIf="actionsEnabled">
+                <div
+                    *ngIf="columns"
+                    class="action"
+                    title="Manage Columns"
+                    (click)="selectingColumn = true"
+                >
+                    <i class="material-icons">view_column</i>
+                </div>
+                <div
+                    (click)="handleAction(actions.reload)"
+                    title="Refresh Table"
+                    class="action"
+                >
+                    <i class="material-icons">refresh</i>
+                </div>
+            </ng-container>
         </div>
     </div>
 </div>

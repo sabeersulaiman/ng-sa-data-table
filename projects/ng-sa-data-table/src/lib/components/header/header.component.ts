@@ -33,6 +33,9 @@ export class SaTableHeaderComponent {
     @Output()
     public columnChanged = new EventEmitter<SaColumnDirective>();
 
+    @Input()
+    public actionsEnabled = true;
+
     public selectingColumn = false;
 
     public actions = actionNames;

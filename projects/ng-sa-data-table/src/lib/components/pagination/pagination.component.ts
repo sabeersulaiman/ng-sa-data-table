@@ -181,8 +181,8 @@ export class SaTablePaginationComponent implements OnInit, AfterViewInit {
         }
     }
 
-    public switchPage(p: number) {
-        if (p !== this.page && p >= 1 && p <= this.lastPage) {
+    public switchPage(p: number, force = false) {
+        if ((p !== this.page && p >= 1 && p <= this.lastPage) || force) {
             this.page = p;
             this.pageChange.emit({ page: p, perPage: this.perPage });
             this._loadPaginationItems();

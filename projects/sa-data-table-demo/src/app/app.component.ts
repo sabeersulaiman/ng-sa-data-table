@@ -1,6 +1,8 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { tableData } from './data';
 import { overflowModes, SaTableFilters } from 'ng-sa-data-table';
+import { dashData } from './dash-data';
+import { SaDataTableComponent } from 'ng-sa-data-table';
 
 @Component({
     selector: 'app-root',
@@ -8,13 +10,20 @@ import { overflowModes, SaTableFilters } from 'ng-sa-data-table';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+    @ViewChild(SaDataTableComponent)
+    public table: SaDataTableComponent;
+
     data = tableData;
 
     tData = [];
 
+    dashData;
+
     tableOverflowModes = overflowModes;
 
     weData = 'DOB Placeholder.';
+
+    actionsEnabled = true;
 
     constructor(private _cdr: ChangeDetectorRef) {}
 
@@ -47,5 +56,25 @@ export class AppComponent {
                 return false;
             }
         });
+    }
+
+    public loadDData() {
+        setTimeout(
+            (() => {
+                this.dashData = dashData.data.data;
+            }).bind(this),
+            3000
+        );
+    }
+
+    public getTransactionStatus(tran: any) {
+        switch (tran.status_id) {
+            case 1:
+                return 'success';
+            case 2:
+                return 'pending';
+            default:
+                return 'failed';
+        }
     }
 }
