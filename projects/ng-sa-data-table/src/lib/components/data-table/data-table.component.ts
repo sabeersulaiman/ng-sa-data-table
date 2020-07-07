@@ -294,4 +294,10 @@ export class SaDataTableComponent
     public reload() {
         this.filter.emit(this.currentFilterData);
     }
+
+    public setPage(page: number, forceLoad: boolean = false) {
+        if (this.paginationInstance) {
+            this.paginationInstance.setPage(page, forceLoad);
+        }
+    }
 }

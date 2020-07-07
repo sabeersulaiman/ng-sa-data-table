@@ -25,6 +25,8 @@ export class AppComponent {
 
     actionsEnabled = true;
 
+    pageSelection = 1;
+
     constructor(private _cdr: ChangeDetectorRef) {}
 
     public handleShonan() {
