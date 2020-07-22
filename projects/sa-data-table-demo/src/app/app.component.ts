@@ -27,6 +27,8 @@ export class AppComponent {
 
     pageSelection = 1;
 
+    selections: any[];
+
     constructor(private _cdr: ChangeDetectorRef) {}
 
     public handleShonan() {
@@ -35,6 +37,7 @@ export class AppComponent {
 
     public onSelectionChange(d) {
         console.log(d);
+        this.selections = d;
     }
 
     public deleteUser(d) {
@@ -77,6 +80,26 @@ export class AppComponent {
                 return 'pending';
             default:
                 return 'failed';
+        }
+    }
+
+    public findRowColorBySelection(i: number, d: any): string {
+        if (!this.selections) {
+            return null;
+        }
+
+        const selected = this.selections.find((x) => x.id === d.id);
+
+        if (selected) {
+            return '#ECF0F4';
+        }
+    }
+
+    public isSelected(i: number, d: any) {
+        if (this.selections && this.selections.find((x) => x.id === d.id)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

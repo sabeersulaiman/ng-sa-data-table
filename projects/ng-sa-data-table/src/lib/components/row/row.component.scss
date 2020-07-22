@@ -16,9 +16,6 @@ td {
     &.normal {
         overflow: auto;
     }
-    &.odd {
-        background: rgba(242, 245, 248, 0.6);
-    }
     &.select-box {
         display: flex;
         align-items: flex-start;

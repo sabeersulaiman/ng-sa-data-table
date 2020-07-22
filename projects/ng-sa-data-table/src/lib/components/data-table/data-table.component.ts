@@ -161,6 +161,12 @@ export class SaDataTableComponent
     @Input()
     public actionsEnabled = true;
 
+    @Input()
+    public rowColor: (index: number, rowData: any) => string;
+
+    @Input()
+    public selectionCheck: (index: number, rowData: any) => boolean;
+
     /**
      * main DI constructor
      */
@@ -299,5 +305,9 @@ export class SaDataTableComponent
         if (this.paginationInstance) {
             this.paginationInstance.setPage(page, forceLoad);
         }
+    }
+
+    public triggerChangeDetection() {
+        this._onDataChange();
     }
 }

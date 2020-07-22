@@ -58,6 +58,8 @@
                         *ngFor="let d of data; let i = index"
                         [rowData]="d"
                         [rowNumber]="i"
+                        [rowColor]="rowColor"
+                        [selectionCheck]="selectionCheck"
                         (selection)="onSelectionChange()"
                         (deSelection)="onSelectionChange()"
                     ></tr>

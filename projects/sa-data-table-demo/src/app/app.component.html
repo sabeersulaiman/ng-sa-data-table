@@ -11,6 +11,8 @@
             (filter)="onTableReload($event)"
             [initialLoad]="true"
             [actionsEnabled]="actionsEnabled"
+            [rowColor]="findRowColorBySelection.bind(this)"
+            [selectionCheck]="isSelected.bind(this)"
         >
             <sa-column
                 [header]="'ID'"

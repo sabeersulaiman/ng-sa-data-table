@@ -1,8 +1,8 @@
 <td
     class="select-box"
     *ngIf="table.selectable"
-    [ngClass]="{ even: rowNumber % 2 === 0, odd: rowNumber % 2 !== 0 }"
     (click)="onSelectionToggle()"
+    [style.background]="getBackgroundColor(rowNumber, rowData)"
 >
     <i class="material-icons" *ngIf="!selected; else selectionIcon"
         >check_box_outline_blank</i
@@ -18,7 +18,7 @@
         [ngStyle]="c.colPaddings"
         [style.text-align]="c.textAlign"
         [class]="c.overflow"
-        [ngClass]="{ even: rowNumber % 2 === 0, odd: rowNumber % 2 !== 0 }"
+        [style.background]="getBackgroundColor(rowNumber, rowData)"
     >
         <ng-container
             *ngIf="c.columnTemplate; else simpleCol"
