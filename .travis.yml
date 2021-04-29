@@ -3,6 +3,7 @@ node_js:
 - '12.13'
 install:
 - yarn install
+- cp README.md projects/ng-sa-data-table/README.md
 script:
 - yarn lib-build
 - cd dist/ng-sa-data-table
