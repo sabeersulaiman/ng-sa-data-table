@@ -2,7 +2,7 @@
     <div class="sa-data-table-content">
         <!-- Header -->
         <sa-table-header
-            [title]="title"
+            [tableName]="tableName || title"
             [headerExtraLeft]="headerExtraLeft"
             [headerExtraRight]="headerExtraRight"
             [columns]="columns"
@@ -40,6 +40,10 @@
                                 >
                             </ng-template>
                         </th>
+                        <th
+                            [ngStyle]="expandHeaderPaddings"
+                            *ngIf="expandable"
+                        ></th>
                         <ng-container *ngFor="let c of columns"
                             ><th
                                 *ngIf="c.visible"
@@ -60,6 +64,7 @@
                         [rowNumber]="i"
                         [rowColor]="rowColor"
                         [selectionCheck]="selectionCheck"
+                        [expansionTemplate]="expansionTemplate"
                         (selection)="onSelectionChange()"
                         (deSelection)="onSelectionChange()"
                     ></tr>

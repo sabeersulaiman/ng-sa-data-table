@@ -102,4 +102,8 @@ export class AppComponent {
             return false;
         }
     }
+
+    public onRowExpanded(d) {
+        console.log(d);
+    }
 }

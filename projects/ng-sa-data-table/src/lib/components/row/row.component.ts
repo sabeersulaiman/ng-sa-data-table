@@ -6,6 +6,7 @@ import {
     Output,
     EventEmitter,
     OnInit,
+    TemplateRef,
 } from '@angular/core';
 import { SaDataTableComponent } from '../data-table/data-table.component';
 import { IfStmt } from '@angular/compiler';
@@ -35,6 +36,15 @@ export class SaTableRowComponent implements OnInit {
     public selectionCheck: (index: number, rowData: any) => boolean;
 
     public selected = false;
+
+    @Input()
+    public expansionTemplate: TemplateRef<any>;
+
+    private _expanded = false;
+
+    public get expanded() {
+        return this._expanded;
+    }
 
     constructor(
         @Inject(forwardRef(() => SaDataTableComponent))
@@ -82,6 +92,13 @@ export class SaTableRowComponent implements OnInit {
             }
         } else {
             return this._indexBasedColor(index);
+        }
+    }
+
+    public onExpandToggle() {
+        this._expanded = !this._expanded;
+        if (this._expanded) {
+            this.table.rowExpanded.emit(this.rowData);
         }
     }
 

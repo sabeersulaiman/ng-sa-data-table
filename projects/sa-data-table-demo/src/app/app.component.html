@@ -3,7 +3,7 @@
         <sa-data-table
             [scrollbarVisible]="false"
             [data]="tData"
-            [title]="'Company Users'"
+            [tableName]="'Company Users'"
             [selectable]="true"
             [total]="100"
             [perPage]="30"
@@ -13,7 +13,15 @@
             [actionsEnabled]="actionsEnabled"
             [rowColor]="findRowColorBySelection.bind(this)"
             [selectionCheck]="isSelected.bind(this)"
+            [expandable]="true"
+            (rowExpanded)="onRowExpanded($event)"
         >
+            <!-- <ng-template #expansionTemplate let-data>
+                <p class="expanded">
+                    Expanded view for user {{ data.firstName }}
+                    {{ data.lastName }} with ID: {{ data.id }}
+                </p>
+            </ng-template> -->
             <sa-column
                 [header]="'ID'"
                 [property]="'id'"

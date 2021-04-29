@@ -12,6 +12,21 @@
     </ng-template>
 </td>
 
+<td
+    class="expansion-box"
+    *ngIf="table.expandable"
+    [style.background]="getBackgroundColor(rowNumber, rowData)"
+    (click)="onExpandToggle()"
+    [title]="expanded ? 'Collapse Row' : 'Expand Row'"
+>
+    <i class="material-icons" *ngIf="!expanded; else expansionIcon"
+        >unfold_more</i
+    >
+    <ng-template #expansionIcon>
+        <i class="material-icons">unfold_less</i>
+    </ng-template>
+</td>
+
 <ng-container *ngFor="let c of table.columns">
     <td
         *ngIf="c.visible"
@@ -29,3 +44,16 @@
         <ng-template #simpleCol> {{ rowData[c.property] }}</ng-template>
     </td>
 </ng-container>
+
+<td
+    *ngIf="expanded"
+    class="row-expansion"
+    [style.gridColumnStart]="1"
+    [style.gridColumnEnd]="table.gridCount"
+    [style.background]="getBackgroundColor(rowNumber, rowData)"
+>
+    <div
+        [ngTemplateOutlet]="expansionTemplate"
+        [ngTemplateOutletContext]="{ $implicit: rowData }"
+    ></div>
+</td>

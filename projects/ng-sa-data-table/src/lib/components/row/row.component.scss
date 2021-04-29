@@ -16,12 +16,27 @@ td {
     &.normal {
         overflow: auto;
     }
-    &.select-box {
+    &.select-box,
+    &.expansion-box {
         display: flex;
         align-items: flex-start;
         justify-content: center;
         cursor: pointer;
         overflow: hidden;
         padding-top: pxrem(22);
+
+        // disable text selection
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                                            supported by Chrome, Edge, Opera and Firefox */
     }
+}
+
+.row-expansion {
+    grid-column-start: 1;
+    grid-column-end: 13;
 }

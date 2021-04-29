@@ -43,10 +43,17 @@ export class SaDataTableComponent
     }
 
     /**
+     * @deprecated
      * title of the table
      */
     @Input()
     public title: string;
+
+    /**
+     * name of the table - replaces the title property
+     */
+    @Input()
+    public tableName: string;
 
     /**
      * scroll bar visibility toggle
@@ -167,6 +174,38 @@ export class SaDataTableComponent
     @Input()
     public selectionCheck: (index: number, rowData: any) => boolean;
 
+    @Input()
+    public expandable = false;
+
+    @ContentChild('expansionTemplate')
+    public expansionTemplate: TemplateRef<any>;
+
+    @Input()
+    public expandHeaderPaddings = {
+        paddingTop: '24px',
+        paddingLeft: '35px',
+        paddingBottom: '24px',
+        paddingRight: '35px',
+    };
+
+    public get gridCount() {
+        let count = this.columns ? this.columns.length : 0;
+        if (this.selectable) {
+            count += 1;
+        }
+        if (this.expandable) {
+            count += 1;
+        }
+
+        return count;
+    }
+
+    /**
+     * emits an event on row expansion
+     */
+    @Output()
+    public rowExpanded = new EventEmitter<any>();
+
     /**
      * main DI constructor
      */
@@ -234,6 +273,11 @@ export class SaDataTableComponent
 
         // if column selection is enabled, there is an extra column for selector
         if (this.selectable) {
+            colSizes.push('70px');
+        }
+
+        // if row expansion is enabled we also need extra column for expansion
+        if (this.expandable) {
             colSizes.push('70px');
         }
 

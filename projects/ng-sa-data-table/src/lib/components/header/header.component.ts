@@ -16,7 +16,7 @@ import { actionNames } from '../../data/internal.data';
 })
 export class SaTableHeaderComponent {
     @Input()
-    public title: string;
+    public tableName: string;
 
     @Input()
     public headerExtraRight: ElementRef;
