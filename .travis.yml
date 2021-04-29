@@ -1,17 +1,17 @@
 language: node_js
 node_js:
-  - '12.13'
+- '12.13'
 install:
-  - yarn install
+- yarn install
 script:
-  - yarn lib-build
-  - cd dist/ng-sa-data-table
+- yarn lib-build
+- cd dist/ng-sa-data-table
 cache: yarn
 deploy:
   provider: npm
   email: sabeersulaimanpv@gmail.com
   api_key:
-    secure: rMeXQWeWfenyIhRaDXVYf5OMqJNjpI+UJYfZnm5uIskLCsO17U7iNHXlFcJt7LjRDJjggx2/2/Ltv0ANF1k4HYtj0K6vATwwV/LbBbKa66mWNNUvKJSXAbypHsY9GPiFvyXLUI3N50ARl0+7tIdEVcdh48g70/lLkTgSMHQqIS63GdtqamLnsOCK1Ke2AB++xH5u6KfIRJ30BQrfdRkAyW41+P+9NXK1CTobHcsFUZYy2DURvc3gkqKjK1py+JaQF6OeBCqrFu0LuZWYkvoAVQxFYDbBLCZDoDdkQlic+kPJuJVZ2k0v/e6nh86LNTJ4R0KOz+OfP11jnIADasOkEEYRZ8DUS8PqA5FQgapo4t8BdcztZKns/JWQNzIRZKEPZyv9b1UMVcATqv3VXjNpuYAL6/EfVEht5hNhjl1rlpGkd9BU2hvd/fCuC2oDVY/p/tuvv4iwQbrCmpQRzruxU23qHki7Ix0y1RMHpZLf+i9EmV+0t/2zacQTYjqo6FXquXLACLoKq+PWucvQdmQiMfH5km+x2gjdC5ImrExYkr50hxwhDOUOhsDn6NI+EtPEpAZZHVFWsFDN5owdSqVUKrMxoIC1NlD9FGmQ2tCqV07B86QYTLnb7z/7dc+XisZu7folOG0MusE99vADxbcF6cIRx//DmcFvPDUO4zzGLtI=
+    secure: B1beREqyMYFW1gxuO3GGs+J/b4eq1XcL8/rJzW7NRvP9XAJ7VVwKECY50wY3poo0e/5q/7wOk3Gwdt/I4cEMbbW5sila3ads5NxT7YHgaDMSYE6aCla/d3nhY9tj3/qeHgN/ypM+NZgUX1I3Am3rQLyD7uDwW2a2CTExPZuv1mWrFvw/bqWkjadtqY8yt08IO54Svi45lvF/MKHHdEoyDqBgTTArLzZlR8GiI3I65bQbMcdH8jd5XB/jHPjSVj/nYGfVgB/Zgb1fFExuQHtJVAePxGsgtblTcEKdl/QzDxlBwOyD22R9lFSqmYNbqWDY6ywzFW9hzvlqmiPOvwvSyjF6EVy38EL8CvOkJ7mrjLfE0X+8qsS8KT9eN4NE8F1wksS/F7L3ni83zvQ4CQbvDfGVvp1M3vwI6nBX/IxL+X0Z6PN4xuPLKbOc3jypG8Vgf1EMXneVGl/jaSlNoWFJfElIqD5x48F/+tMqC1v++4iiw1jyI8cT70RjMjVM2BAnwOUd76TrAJUX6ZGvDDmDZxKGZC3ygYptY3PqtNNGB+KQYdUa/l1Ivfwy31J551+6Vaa0Aoe7hFkCtBvEQHDQdnrBJbx82fOYVV6zB/3RU3p0zOsP9Q7Z7vkfDjEqzu6MqduLt+zgAfGwFi+3AODSA5KoPN+MmQwNTx0I0fFzsKc=
   on:
     branch: master
   skip_cleanup: true
