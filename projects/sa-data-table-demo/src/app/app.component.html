@@ -16,12 +16,12 @@
             [expandable]="true"
             (rowExpanded)="onRowExpanded($event)"
         >
-            <!-- <ng-template #expansionTemplate let-data>
+            <ng-template #expansionTemplate let-data>
                 <p class="expanded">
                     Expanded view for user {{ data.firstName }}
                     {{ data.lastName }} with ID: {{ data.id }}
                 </p>
-            </ng-template> -->
+            </ng-template>
             <sa-column
                 [header]="'ID'"
                 [property]="'id'"

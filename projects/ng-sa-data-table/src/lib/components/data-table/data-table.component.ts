@@ -189,7 +189,9 @@ export class SaDataTableComponent
     };
 
     public get gridCount() {
-        let count = this.columns ? this.columns.length : 0;
+        let count = this.columns
+            ? this.columns.filter((x) => x.visible).length + 1
+            : 1;
         if (this.selectable) {
             count += 1;
         }

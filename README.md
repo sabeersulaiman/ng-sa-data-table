@@ -1,5 +1,7 @@
 # Data Table (ng-sa-data-table)
 
+Easy, responsive, simple to use Angular v9+ data table (Tested upto v11) using HTML5 grids. Please look into the demo project if a demo is required.
+
 ## Installation
 
 To install from NPM run:
@@ -31,7 +33,49 @@ import { NgSaDataTableModule } from 'ng-sa-data-table';
 export class YourModule { }
 ```
 
-Then use the data table inside the components wherever required.
+Then use the data table inside the components wherever required. To add a table to a page use the main component `sa-data-table`. The height of the container will need to have a fixed height. The property `data` takes the array of rows to be shown in the table. The event filter will be triggered when there is a page change or per page change. It will receive an object of type `SaTableFilters` which we can use to load pages. Setting the property `initialLoad` to `true` will trigger the filter event.
+
+To add a column use the `sa-column` directive inside the `sa-data-table` component. The code below adds a table with just one column _ID_.
+
+```html
+<sa-data-table
+    [data]="tData"
+    [tableName]="'Company Users'"
+    [total]="100"
+    [perPage]="30"
+    (filter)="onTableReload($event)"
+    [initialLoad]="true"
+>
+    <sa-column [header]="'ID'" [property]="'id'" [visible]="false"></sa-column>
+</sa-data-table>
+```
+
+#### Extending the header
+
+You can add your own components into the header using `ng-templates`. To more items to right part of use `headerExtraRight` and to add to the left along side the tableName use the `headerExtraLeft` template. Refer to the example below.
+
+```html
+<sa-data-table
+    [scrollbarVisible]="false"
+    [data]="tData"
+    [tableName]="'Company Users'"
+    [selectable]="true"
+    [total]="100"
+    [perPage]="30"
+    (selection)="onSelectionChange($event)"
+    (filter)="onTableReload($event)"
+    [initialLoad]="true"
+>
+    <ng-template #headerExtraRight>
+        <button (click)="handleClick()" class="umaga">Some Button</button>
+    </ng-template>
+    <ng-template #headerExtraLeft>
+        <button (click)="handleSomeOtherClick()" class="umaga">
+            Some Other Button
+        </button>
+    </ng-template>
+</sa-data-table>
+```
 
 ```html
 <sa-data-table
